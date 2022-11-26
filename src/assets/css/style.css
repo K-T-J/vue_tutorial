@@ -1,0 +1,450 @@
+* {/*전체 선택자*/
+    margin: 0;  /*요소 바깥 여백*/
+    padding: 0; /*요소 안쪽 여백*/
+    box-sizing: border-box; /*박스에 크기를 어떤 기준으로 계산할지 기본값 : content box*/
+  }
+  /*
+  - list-style-type         : 항목 모양 종류
+  - list-style-position     : 위치
+  - list-style-image        : 이미지 
+  */
+  ul { /*모든 ul 태그*/
+    list-style: none;  /*list-style: none : 항목 모양 없음*/
+  }       
+
+  /*
+  - a:link      : 방문하기전의 링크
+  - a:visited   : 방문한 링크
+  - a:hover     : 링크에 마우스 포인터를 올려 놓았을 때
+  -  a:active   : 링크를 마우스로 클릭한 순간
+  */
+  a, a:active { /*a 태그, a:active : 링크를 마우스로 클릭하는 순간*/
+    text-decoration: none; /*text-decoration은 선으로 텍스트를 꾸밀 수 있게 해주는 속성 none : 선을 만들지 않음*/
+    color: #000;
+  }
+  
+/*
+- position : static     : (기본값) 원래 있어야 하는 위치에 배치
+- position : relative   : 원래 위치를 기준으로 상대적으로 배치 top, bottom, left, right
+- position : absolute   : 기준을 자신이 아닌 상위 요소에서 찾는다
+- position : fixed      : 화면을 스크롤하더라도 브라우저 화면의 특정부분의 고정되어 움직이지 않는다.
+- position :
+*/
+  body {/*body 태그*/
+    position: relative; /*문서 상에 요소를 배치하는 방법을 지정 / static : 원래 위치를 기준으로 상대적 배치*/
+    background: #f4f4f4; /*배경색*/
+    height: 100vh; /*높이*/
+    min-height: 1220px; /*최소 높이*/
+    font-family: 'Noto Sans KR', sans-serif; /*글꼴*/
+  }
+  
+  body::after { /*body태그 html이 끝날때 추가 되는 가상 요소*/
+    position: fixed; /*화면을 스크롤하더라도 브라우저 화면의 특정부분의 고정되어 움직이지 않는다.*/
+    content: '';    /*지정할 content*/
+    top: 0;
+    left: 0;
+    display: block;
+    height: 100%;
+    width: 100%;
+    z-index: -100;  /*position 속성을 이용하면 요소를 겹치게 놓을 수 있다. 이때 요소들의 수직 위치를 z-index 속성으로 정한다 값은 정수이며, 숫자가 클 수록 위로 올라오고, 숫자가 작을 수록 아래로 내려간다*/
+    backdrop-filter: blur(10px);/*요소 뒤 영역에 흐림이나 색상 시프트 등 그래픽 효과를 적용할 수 있는 속성이다 요소 "뒤"에 적용하기 때문에, 효과를 확인하려면 요소나 요소의 배경을 적어도 반투명하게는 설정해야 한다*/
+  }
+  
+  
+  
+  /* WRAPPER */
+
+/*
+ex) box-shadow: [h-offset] [v-offset] [blur] [spread] [color] (inset);
+- h-offset: 그림자의 좌우 위치 설정
+- v-offset: 그림자의 상하 위치 설정
+- blur: 그림자의 흐려짐 정도의 범위
+- spread: 그림자의 크기
+- color: 그림자 색상
+- inset: (optional) 요소 내부에 그림자 표현, 기본적으로 그림자는 요소 외부에 위치
+  
+*/
+  section.wrapper {/*section태그에 wrapper 클래스*/
+    margin: 0 auto; /*상위 컨테이너의 중앙에 위치*/
+    width: 1024px; /*너비*/
+    height: 1150px; /*높아*/
+    background-color: #fff; /*배경*/
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /*요소의 테두리를 감싼 그림자 효과를 추가*/
+  }
+  
+  article.contents { /*article태그에 contents클래스*/
+    position: relative;
+    margin: 0 auto;
+    width: 768px;
+  }
+  
+  /* HEADER */
+  
+  header {/*header 태그*/
+    padding-top: 64px;
+    margin-bottom: 35px;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+  }
+  
+  header h1 {/*header태그 안에 h1태그*/
+    font-size: 54px;
+    color: #343a40;
+  }
+  
+  header p {/*header태그 안에 p태그*/
+    font-size: 16px;
+    color: #868e96;
+  }
+  
+  header .author {/*header태그 안에 author클래스*/
+    position: relative;
+    margin-top: 58px;
+    height: 48px;
+  }
+  
+  header .author img {/*header태그 안에 author클래스 안에 img 태그*/
+    height: 48px;
+    border-radius: 50%;/*테두리를 둥글게*/
+  }
+  
+  header .author .user {/*header태그 안에 author클래스 안에 user클래스*/
+    position: absolute;/*기준을 자신이 아닌 상위 요소에서 찾는다*/
+    top: 50%;
+    left: 65px;
+    transform: translateY(-50%); /*transform : 현재위치를 기준으로 이동하기 / translateY : 세로로 이동*/
+    font-size: 16px;
+    font-weight: 600; /*폰트 굵기*/
+  }
+  
+  
+  
+  
+  /* PREVIEW */
+  
+  /*
+  overflow: visible : (기본값) 넘칠 경우 컨텐츠가 상자 밖으로 보여진다 
+  overflow: hidden  : 넘치는 부분은 잘려서 보여지지 않는다
+  overflow: scroll  : 스크롤바가 추가되어 스크롤 할 수 있다
+  overflow: auto    : 컨텐츠 양에 따라 스크롤바를 추가할지 자동으로 결정된다
+  */
+  .preview { /*.preview 클래스*/
+    margin: 0 auto;  
+    height: 402px;
+    width: 768px;
+    background-color: #d4d4d4;
+    overflow: hidden; /*콘텐츠가 너무 커서 요소의 블록 서식 맥락에 맞출 수 없을 때의 처리법을 지정한다*/
+    /* background-size: cover;
+    background-repeat: no-repeat; */
+  }
+  
+  /* COMPONENT OPTION 1 */
+  
+  #comp_opt1 { /* (ui 태그) comp_opt1 아이디*/
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+  }
+  
+  #comp_opt1 .title {/*comp_opt1 아이디 안에 title 클래스*/
+    position: relative;
+    display: block; /*블록 박스*/
+    top: 140px;
+    font-size: 54px;
+    font-weight: 500;
+  }
+  
+  /* #comp__opt1 .title::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    border: 1px solid #fff;
+    width: 100%;
+    left: 0;
+    bottom: -5px;
+  } */
+  
+  #comp_opt1 .subtitle { /*comp_opt1 아이디 안에 subtitle 클래스*/
+    position: relative;
+    display: inline-block; /*인라인 블럭*/
+    top: 150px;
+    font-size: 24px;
+    border-top: 1px solid #ffffff; /*박스 테두리 위쪽 실선*/
+    padding-top: 5px;
+  }
+  
+  #comp_opt1 .category { /*comp_opt1 아이디 안에 category 클래스*/
+    position: relative;
+    top: 220px;
+    font-size: 24px;
+  }
+  
+  
+  /* COMPONENT OPTION 2 */
+  
+  #comp__opt2 {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+  }
+  
+  #comp__opt2 .title {
+    position: relative;
+    display: inline-block;
+    top: 150px;
+    font-size: 54px;
+    font-weight: 500;
+  }
+  /*
+  visibility: visible   : 보임
+  visibility: hidden    : 숨김
+  visibility: collapse  : 겹치도록 지정
+  visibility: inherit   : 부모 요소의 값을 상속
+  */
+  #comp__opt2 .subtitle {
+    visibility: hidden; /* 문서의 레이아웃을 변경하지 않고 요소를 보이거나 숨긴다*/
+    opacity: 0;
+  }
+  
+  #comp__opt2 .category {
+    position: relative;
+    top: 230px;
+    font-size: 25px;
+  }
+  
+  
+  /* COMPONENT OPTION 3 */
+  
+  #comp__opt3 {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+  }
+  
+  #comp__opt3 .title {
+    position: relative;
+    display: inline-block;
+    top: 160px;
+    font-size: 56px;
+    font-weight: 500;
+  }
+  
+  #comp__opt3 .subtitle,
+  #comp__opt3 .category {
+    visibility: hidden;
+    opacity: 0;
+  }
+  
+  
+  /* CONTROL PANEL */
+  
+  .control__panel {
+    margin: 35px 0 100px 0;
+    padding-bottom: 50px;
+  }
+  
+  .background__txt,
+  .components__txt,
+  .textstyle__txt {
+    color: #666666;
+    font-weight: 500;
+  }
+  
+  
+  /* INPUT FIELDS */
+  
+  .inputFields::after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+  
+  input.input__field {
+    width: 248px;
+    height: 40px;
+    float: left;
+    margin-right: 12px;
+    border: 1px solid #cacaca;
+    border-radius: 14px;
+    color: #555;
+    font-size: 16px;
+    font-weight: 400;
+    padding-left: 14px;
+  }
+  
+  .input__field:focus {
+    background-color: #3b45ff;
+    color: #fff;
+    outline: none;
+  }
+  
+  .input__field:focus::placeholder {
+    color: #a9adfdc0;
+  }
+  
+  input.input__field::placeholder {
+    color: #a7a7a7;
+  }
+  
+  .input__field:last-child {
+    margin-right: 0;
+  }
+  
+  .control__panel .inputFields .inactive {
+    display: none;
+  }
+  
+  
+  /* BTN */
+  
+  .btn {
+    width: 192px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    background-color: #f4f4f4;
+    color: #666666;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, opacity 0.4s ease, transform 0.4s ease;
+  }
+  
+  .btn:focus {
+    outline: none;
+  }
+  
+  .btn:active {
+    transform: scale(1.05);
+    opacity: 0.2;
+  }
+  
+  .btns {
+    float: right;
+  }
+  
+  .selected {
+    background-color: #3b45ff;
+    color: #fff;
+  }
+  
+  .btn:hover {
+    background-color: #3b45ff;
+    color: #fff;
+  }
+  
+  /* BACKGROUND */
+  
+  .background__btns {
+    margin-top: 20px;
+    border-top: 1px solid #cacaca;
+  }
+  
+  .background__btns,
+  .components__btns,
+  .text__style {
+    height: 70px;
+    line-height: 68px;
+    border-bottom: 1px solid #cacaca;
+  }
+  
+  
+  /* TEXT STYLE */
+  
+  
+  
+  
+  
+  /* MASTER PANEL */
+  
+  .master__panel {
+    margin-top: 50px;
+    text-align: center;
+  }
+  
+  .master__panel .btn {
+    border-radius: 0;
+    margin-right: 10px;
+  }
+  
+  .master__panel .btn:last-child {
+    margin-right: 0;
+    background-color: #888;
+    color: #fff;
+  }
+  
+  .master__panel .btn:last-child:hover {
+    background-color: #3b45ff;
+    color: #fff;
+  }
+  
+  
+  
+  /* OUTPUT */
+  
+  .capture_modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -54%);
+    z-index: 100;
+  }
+  
+  .capture_modal::after {
+    position: absolute;
+    text-align: center;
+    content: '🎉 완성되었습니다 🎉';
+    width: 600px;
+    display: inline-block;
+    top: -80px;
+    color: #fff;
+    font-size: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+  }
+  
+  .hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+  
+  .canvas {
+    position: relative;
+    border: 1px solid #fff;
+    /* box-shadow: 0 0 100px #fff; */
+  }
+  
+  
+  /* COPYRIGHT */
+  
+  .copyright {
+    position: relative;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: right;
+    top: -77px;
+  }
+  
+  .me {
+    color: #fff;
+    display: inline-block;
+  }
+  
+  .unsplash {
+    color: #ffffff;
+    font-weight: 300;
+    font-size: 12px;
+  }
